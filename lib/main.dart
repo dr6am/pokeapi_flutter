@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'ui/pages/details_page/details_page.dart';
+import 'ui/pages/poke_list_page/poke_list_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,56 +15,26 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'PokeApi Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          primarySwatch: Colors.grey,
+          textTheme: const TextTheme(
+            headline2: TextStyle(
+              fontSize: 30,
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+            ),
+            headline4: TextStyle(
+              fontSize: 22,
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+          )),
+      routes: routes,
+      initialRoute: '/',
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
+final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+  '/': (_) => const PokeListPage(),
+  '/details': (_) => const DetailsPage(),
+};
